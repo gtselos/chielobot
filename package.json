@@ -1,0 +1,23 @@
+{
+  "name": "chielobot",
+  "version": "0.0.1",
+  "description": "A discord bot",
+  "scripts": {
+    "start": "NODE_PATH=./build node build/main.js",
+    "build": "tsc -p .",
+    "dev": "nodemon src/main.ts"
+  },
+  "author": "georgizzle",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
+    "lightweight-charts": "^3.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  }
+}
