@@ -4,7 +4,7 @@ export class HelpController {
 
     static HELP_COMMAND_REGEX = /^$chielobot help/
     
-    static sendMessage(channel: any): void {
+    static sendMessage(message: any): void {
         const usageMessage = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Chielobot commands')
@@ -13,6 +13,6 @@ export class HelpController {
           { name: 'Get binance ticker price', value: '$t {Ticker symbol 1} {Ticker 2}'},
           { name: 'example', value: '$binance BTC USDT'},
         )
-        channel.send(usageMessage);
+        message.channel.send(usageMessage);
     }
 }
