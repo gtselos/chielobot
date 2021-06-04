@@ -1,10 +1,15 @@
-import { HistoricalPriceData } from "domain/model/HistoricalPriceData";
-import { Price } from "domain/valueObject/Price";
+import { HistoricalPriceCandleData } from "../domain/model/HistoricalPriceCandleData";
+import { Price } from "../domain/valueObject/Price";
 
 export interface PriceRepositoryInterface {
 
-    getCurrentPriceByticker(tickerValues: string[] | undefined) : Promise<Price>;
+    getCurrentPriceByticker(tickerValues: string[]) : Promise<Price>;
 
-    getPricesByIntervalAndTicker(interval: string, tickerValues: string[] | undefined) : Promise<HistoricalPriceData>;
+    getPricesByIntervalAndTicker(
+        interval: string,
+        tickerValues: string[],
+        startDate?: Date,
+        endDate?: Date
+        ): Promise<Array<HistoricalPriceCandleData>>;
 
 }
