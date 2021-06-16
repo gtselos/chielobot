@@ -42,4 +42,12 @@ export class Price {
     public set ask(value: number | undefined) {
         this._ask = value;
     }
+
+    public toString = (): string => {
+        return `{
+            ticker: ${this._ticker},
+            market: ${this._market}
+            ${this._bid === undefined ? '' : `, bid: ${this._bid},`}
+            ${this._ask === undefined ? '' : `ask: ${this._ask},`}}`
+    }
 }

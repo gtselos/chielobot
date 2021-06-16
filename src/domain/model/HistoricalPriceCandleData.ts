@@ -70,4 +70,15 @@ export class HistoricalPriceCandleData {
     public set volume(value: number) {
         this._volume = value;
     }
+
+    public toString = (): string => {
+        return `{
+            openTime: ${this._openTime},
+            closeTime: ${this._closeTime},
+            open: ${this._open},
+            close: ${this._close},
+            high: ${this._high},
+            low: ${this._low},
+            volume: ${this._volume}}`
+    }
 }

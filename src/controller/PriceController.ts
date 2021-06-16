@@ -8,7 +8,7 @@ import { PriceToChartConverter } from '../converter/PriceToChartConverter';
 export class PriceController {
 
     static CURRENT_PRICE_COMMAND_REGEX = /^\$t\s+([^ ]+)\s+([^ ]+)/;
-    static HISTORICAL_PRICE_COMMAND_REGEX = /^\$t\s+([^ ]+)\s+([^ ]+)\s+(1m|3m|5m|15m|30m|1h|2h|4h|6h|8h|12h|1d|3d|1w|1M)/;
+    static HISTORICAL_PRICE_COMMAND_REGEX = /^\$h\s+([^ ]+)\s+([^ ]+)\s+(1m|3m|5m|15m|30m|1h|2h|4h|6h|8h|12h|1d|3d|1w|1M)/;
 
     static async getCurrentPrice(message: any): Promise<void> {
       let tickerValues: string[] | undefined =
@@ -50,9 +50,10 @@ export class PriceController {
 
     static async getHistoricalPriceCandleData(message: any): Promise<void> {
       let functionParams: string[] | undefined =
-        PriceController.CURRENT_PRICE_COMMAND_REGEX.exec(
+        PriceController.HISTORICAL_PRICE_COMMAND_REGEX.exec(
           message.content)?.map((element: any) => element as string
       );
+      console.log(functionParams);
       if (functionParams == undefined) {
         const errorMessage = new Discord.MessageEmbed()
         .setColor('#FF0000')
@@ -78,7 +79,14 @@ export class PriceController {
         message.channel.send(errorMessage);
         return;
       }
-      image = PriceToChartConverter.createCandleStickChart(priceData);
-      message.channel.send("Chart", {files: [image]});
+      image = await PriceToChartConverter.createCandleStickChart(priceData);
+      const attachment = new Discord
+        .MessageAttachment(image, 'chart.png');
+      const embed = new Discord.MessageEmbed()
+        .setTitle('chart')
+        .attachFiles(attachment)
+        .setImage('attachment://chart.png');
+
+        message.channel.send({embed}).catch(console.error);
     }
 }
