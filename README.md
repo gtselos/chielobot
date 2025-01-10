@@ -1,1 +1,1 @@
-A discord bot with information for ctypto trading
+A discord bot with information for crypto trading
